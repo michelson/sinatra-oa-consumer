@@ -6,15 +6,15 @@ require "oauth/consumer"
 
 enable :sessions
 
-CONFIG = YAML.load("config.yml")
+CONFIG = YAML.load_file("config.yml")
 
 before do
   session[:oauth] ||= {}
-  consumer_key = CONFIG[:key]
-  consumer_secret = CONFIG[:secret]
+  consumer_key = CONFIG["key"]
+  consumer_secret = CONFIG["secret"]
   
   @consumer ||= OAuth::Consumer.new( consumer_key, consumer_secret , {
-      :site=>CONFIG[:host]
+      :site=>CONFIG["host"]
       #:authorize_path => "/oauth/request_token", 
       #:access_token_path => "/oauth/access_token",
       #:authorize_path =>"/oauth/authorize"
